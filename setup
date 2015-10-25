@@ -1,0 +1,119 @@
+#!/bin/bash
+#======================================================================================
+# Configure an instance of Ubuntu Linux to support basic programming training using
+# Racket and AppInventor.
+#
+# Arguments:
+# (None)		
+#
+# Version: 0.1.0
+# Date: 24 Oct 2015
+# Author: Dave Nicolette
+#======================================================================================
+export INSTALL_DIR="$HOME/provision-racket-ubuntu"
+export COMMON_DIR="provision-ubuntu-common"
+
+git clone "git://github.com/neopragma/$COMMON_DIR"
+
+"./$COMMON_DIR/ubuntu_desktop_tweaks"
+
+RESOURCES="$(pwd)/resources"
+
+# Set the desktop background image
+
+echo 
+echo '============================================================='
+echo 'Setting the desktop background image'
+mkdir -p "$HOME/.local/backgrounds"
+cp "$RESOURCES/racket-background.png" "$HOME/.local/backgrounds/."
+gsettings set org.gnome.desktop.background picture-uri file:///home/racket/.local/backgrounds/racket-background.png
+
+# Copy help files to the desktop
+
+echo
+echo '============================================================='
+echo 'Copying help files to the desktop'
+cp "$RESOURCES/tips-and-hints.html" "$HOME/Desktop"
+cp -r "$RESOURCES/.images" "$HOME/Desktop/."
+
+# Set the Firefox bookmarks
+
+pushd /home/racket/.mozilla/firefox
+PROFILEDIR=$(grep -n Path profiles.ini | cut -d '=' -f 2)
+cd $PROFILEDIR
+cp places.sqlite places-sqlite.orig
+echo 
+echo '============================================================='
+echo 'Setting Firefox bookmarks...'
+echo "Copying places.sqlite from $RESOURCES to $(pwd)"
+cp "$RESOURCES/places.sqlite" .
+popd
+
+echo
+echo '============================================================='
+echo 'Downloading Racket'
+wget -c http://mirror.racket-lang.org/racket-6.2.1-x86_64-linux-ubuntu-precise.sh -O racket-6.2.1-x86_64-linux-ubuntu-precise.sh
+
+test -f "$HOME/.bashrc-orig" || cp "$HOME/.bashrc" "$HOME/.bashrc-orig"
+echo "export PATH=$PATH:/home/racket/bin" >> "$HOME/.bashrc"
+
+echo
+echo '============================================================='
+echo '>>>> Racket interactive installer <<<<'
+echo 'When prompted, reply as follows:'
+echo
+echo 'When asked for an administrator password...'
+echo '  Reply: racket'
+echo
+echo 'Do you want a Unix-style distribution?'
+echo '  Reply: no'
+echo
+echo 'Where do you want to install the "racket" directory tree?'
+echo '  Reply: 3 (that is, ~/racket)'
+echo
+echo 'If you want to install new system links...'
+echo '  Reply: /home/racket'
+
+sh racket-6.2.1-x86_64-linux-ubuntu-precise.sh
+
+echo
+echo '============================================================='
+echo 'Setting group and owner for Racket configuration files'
+pushd "$HOME"
+sudo chown racket .cache/dconf
+sudo chgrp racket .cache/dconf
+sudo chown racket .config/enchant
+sudo chgrp racket .config/enchant
+sudo chown racket .config/gedit
+sudo chgrp racket .config/gedit
+sudo chown racket .dbus
+sudo chrgp racket .dbus
+sudo chown racket .dbus/session-bus
+sudo chrgp racket .dbus/session-bus
+sudo chown racket .gvfs
+sudo chrgp racket .gvfs
+popd
+
+echo
+echo '============================================================='
+echo 'Downloading AppInventor installer'
+wget -c http://commondatastorage.googleapis.com/appinventordownloads/appinventor2-setup_1.1_all.deb -O appinventor2-setup_1.1_all.deb
+
+echo
+echo '============================================================='
+echo 'Installing AppInventor and dependencies'
+sudo dpkg -i *.deb
+sudo apt-get -y install libc6-i386
+sudo apt-get -y install zlib1g:i386
+
+echo
+echo '============================================================='
+echo 'Configuring scripts, desktop files and icons for AppInventor aiStarter'
+cp "$RESOURCES/aistop" "$HOME/bin/aistop"
+chmod +x "$HOME/bin/aistop"
+sudo cp "$RESOURCES/aistarter.desktop" /usr/share/applications/.
+sudo cp "$RESOURCES/aistop.desktop" /usr/share/applications/.
+sudo cp "$RESOURCES/android-icon.png" /usr/share/pixmaps/.
+sudo cp "$RESOURCES/android-icon-red.png" /usr/share/pixmaps/.
+
+

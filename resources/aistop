@@ -1,0 +1,5 @@
+#!/bin/bash
+
+AISTARTER=$(netstat -ltnp | egrep aiStarter | tr -s ' ' | cut -d ' ' -f 7 | cut -d '/' -f 1)
+
+sudo kill -9 $AISTARTER

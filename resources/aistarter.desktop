@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=aiStarter
+X-GNOME-FullName=aiStarter: Android interface for web browsers
+Comment=Supports Android emulation when using MIT AppInventor
+Keywords=appinventor
+Exec=sudo /usr/google/appinventor/commands-for-Appinventor/aiStarter &
+Terminal=true
+Type=Application
+StartupNotify=true
+Icon=android-icon.png
+Categories=Applications
+

@@ -1,0 +1,52 @@
+#!/bin/bash
+#======================================================================================
+# Configure an instance of Ubuntu Linux to support basic programming training using
+# Racket and AppInventor.
+#
+# Arguments:
+# (None)		
+#
+# Version: 0.1.0
+# Date: 24 Oct 2015
+# Author: Dave Nicolette
+#======================================================================================
+export INSTALL_DIR="$HOME/provision-racket-ubuntu"
+export COMMON_DIR="provision-ubuntu-common"
+
+git clone "git://github.com/neopragma/$COMMON_DIR"
+
+"./$COMMON_DIR/ubuntu_desktop_tweaks"
+
+RESOURCES="$(pwd)/resources"
+
+# Set the desktop background image
+
+echo 
+echo '============================================================='
+echo 'Setting the desktop background image'
+mkdir -p "$HOME/.local/backgrounds"
+cp "$RESOURCES/racket-background.png" "$HOME/.local/backgrounds/."
+gsettings set org.gnome.desktop.background picture-uri file:///home/racket/.local/backgrounds/racket-background.png
+
+# Copy help files to the desktop
+
+echo
+echo '============================================================='
+echo 'Copying help files to the desktop'
+cp "$RESOURCES/tips-and-hints.html" "$HOME/Desktop"
+cp -r "$RESOURCES/.images" "$HOME/Desktop/."
+
+# Set the Firefox bookmarks
+
+pushd /home/racket/.mozilla/firefox
+PROFILEDIR=$(grep -n Path profiles.ini | cut -d '=' -f 2)
+cd $PROFILEDIR
+cp places.sqlite places-sqlite.orig
+echo 
+echo '============================================================='
+echo 'Setting Firefox bookmarks...'
+echo "Copying places.sqlite from $RESOURCES to $(pwd)"
+cp "$RESOURCES/places.sqlite" .
+popd
+
+
