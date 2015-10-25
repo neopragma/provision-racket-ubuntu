@@ -115,5 +115,8 @@ sudo cp "$RESOURCES/aistarter.desktop" /usr/share/applications/.
 sudo cp "$RESOURCES/aistop.desktop" /usr/share/applications/.
 sudo cp "$RESOURCES/android-icon.png" /usr/share/pixmaps/.
 sudo cp "$RESOURCES/android-icon-red.png" /usr/share/pixmaps/.
+test -f "$HOME/.bashrc-orig" || cp "$HOME/.bashrc" "$HOME/.bashrc-orig"
+mkdir -p "$HOME/bin"
+echo "export PATH=$PATH:$HOME/bin" >> "$HOME/.bashrc"
 
 
