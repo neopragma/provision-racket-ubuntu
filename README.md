@@ -6,23 +6,25 @@ Provision a VM to serve as a learning environment for people wanting to learn pr
 
 From time to time, you will be prompted for an administrator password. Use ```racket```.
 
-Step 1. Create a VM using your favorite virtualization tool (e.g., VMware or VirtualBox).
+### Step 1. Create a VM using your favorite virtualization tool (e.g., VMware or VirtualBox).
 
-Step 2. Install a recent version of Ubuntu Linux desktop. Use ```racket``` as the userid and ```racket``` as the administrator password. Apply any available updates.
+### Step 2. Install a recent version of Ubuntu Linux desktop. 
 
-Step 3. Install git.
+Use ```racket``` as the userid and ```racket``` as the administrator password. Apply any available updates.
+
+### Step 3. Install git.
 
 ```shell
 sudo apt-get -y install git
 ```
 
-Step 4. Clone this repo.
+### Step 4. Clone this repo.
 
 ```shell
 git clone http://github.com/neopragma/provision-racket-ubuntu
 ```
 
-Step 5. Run the setup script.
+### Step 5. Run the setup script.
 
 ```shell
 cd provision-racket-ubuntu
@@ -32,15 +34,18 @@ cd provision-racket-ubuntu
 The racket installer will ask you a few questions. Reply as follows.
 
 Do you want a Unix-style distribution?
+
 Reply: no
 
 Where do you want to install the "racket" directory tree?
+
 Reply: 3 (that is, ~/racket)
 
 If you want to install new system links...
+
 Reply: /home/racket
 
-Step 6: Manual Firefox configuration
+### Step 6: Manual Firefox configuration
 
 To help tailor Firefox to support the intended use of the environment, make the following changes to settings:
 
@@ -78,5 +83,11 @@ After restarting, in menu choose
       Install AdBlock Lite
 ```
 
+## Getting started
 
+The main purpose of this environment is to support beginning programming using _DrRacket_, guided by the book, _How To Design Programs_. 
+
+Firefox is configured to open several tabs, including the help file ```tips-and-hints.html``` on the desktop as well as _How To Design Programs_, the _Racket Language_ homepage, and _Cyber-Dojo_. The _Hints and Tips_ page explains how the environment is set up and how to get started using _DrRacket_ and the _How To Design Programs_ book to learn programming. 
+
+The second learning tool configured in the environment is MIT's _AppInventor_. This is for developing Android applications for smart phones and tablets. You will work with AppInventor online through the site http://appinventor.mit.edu/. MIT provides an Android emulator you can use in lieu of an actual phone, but it is not very easy to configure. This environment has been set up so that you can start and stop the emulator using icons located on the Unity launcher located on the left-hand side of the screen.
 
