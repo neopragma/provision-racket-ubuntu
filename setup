@@ -44,6 +44,8 @@ echo
 echo '============================================================='
 echo 'Setting Firefox bookmarks...'
 echo "Copying places.sqlite from $RESOURCES to $(pwd)"
+firefox -silent
+killall firefox
 pushd /home/racket/.mozilla/firefox
 PROFILEDIR=$(grep -n Path profiles.ini | cut -d '=' -f 2)
 cd $PROFILEDIR
@@ -80,6 +82,7 @@ echo 'If you want to install new system links...'
 echo '  Reply: /home/racket'
 
 sh racket-6.2.1-x86_64-linux-ubuntu-precise.sh
+sudo cp "$RESOURCES/drracket.desktop" /usr/share/applications/.
 
 # Install AppInventor
 
