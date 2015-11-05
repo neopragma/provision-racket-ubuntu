@@ -45,6 +45,13 @@ If you want to install new system links...
 
 Reply: /home/racket
 
+#### Note
+
+Don't worry if you see the following error messages during the racket install:
+
+- /home/racket/share/man/man1 does not exist
+- /home/racket/share/applications does not exist
+
 ### Step 6: Manual Firefox configuration
 
 To help tailor Firefox to support the intended use of the environment, make the following changes to settings:
