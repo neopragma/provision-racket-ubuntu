@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Untitled - DrRacket
+Icon=drracket.png
+Path=/home/racket
+Exec=/home/racket/racket/bin/../lib/gracket -N /home/racket/bin/drracket -J DrRacket -l- drracket/drracket.rkt
+StartupNotify=false
+StartupWMClass=DrRacket
+OnlyShowIn=Unity;
+X-UnityGenerated=true
