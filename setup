@@ -49,11 +49,14 @@ echo "Copying places.sqlite from $RESOURCES to $(pwd)"
 cp "$RESOURCES/places.sqlite" .
 popd
 
+# Install Racket
+
 echo
 echo '============================================================='
 echo 'Downloading Racket'
 wget -c http://mirror.racket-lang.org/racket-6.2.1-x86_64-linux-ubuntu-precise.sh -O racket-6.2.1-x86_64-linux-ubuntu-precise.sh
 
+mkdir -p "$HOME/bin"
 test -f "$HOME/.bashrc-orig" || cp "$HOME/.bashrc" "$HOME/.bashrc-orig"
 echo "export PATH=$PATH:/home/racket/bin" >> "$HOME/.bashrc"
 
@@ -93,6 +96,8 @@ sudo chrgp racket .dbus/session-bus
 sudo chown racket .gvfs
 sudo chrgp racket .gvfs
 popd
+
+# Install AppInventor
 
 echo
 echo '============================================================='
