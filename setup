@@ -83,6 +83,7 @@ echo '  Reply: /home/racket'
 
 sh racket-6.2.1-x86_64-linux-ubuntu-precise.sh
 sudo cp "$RESOURCES/drracket.desktop" /usr/share/applications/.
+sudo cp "$RESOURCES/drracket.png" /usr/share/pixmaps/.
 
 # Install AppInventor
 
