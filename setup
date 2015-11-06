@@ -6,8 +6,8 @@
 # Arguments:
 # (None)		
 #
-# Version: 0.1.0
-# Date: 24 Oct 2015
+# Version: 0.2.0
+# Date: 06 Nov 2015
 # Author: Dave Nicolette
 #======================================================================================
 export INSTALL_DIR="$HOME/provision-racket-ubuntu"
@@ -38,20 +38,12 @@ echo 'Copying help files to the desktop'
 cp "$RESOURCES/tips-and-hints.html" "$HOME/Desktop"
 cp -r "$RESOURCES/.images" "$HOME/Desktop/."
 
-# Set the Firefox bookmarks
+# Unpack preconfigured Firefox files
 
 echo 
 echo '============================================================='
-echo 'Setting Firefox bookmarks...'
-echo "Copying places.sqlite from $RESOURCES to $(pwd)"
-firefox -silent
-killall firefox
-pushd /home/racket/.mozilla/firefox
-PROFILEDIR=$(grep -n Path profiles.ini | cut -d '=' -f 2)
-cd $PROFILEDIR
-cp places.sqlite places-sqlite.orig
-cp "$RESOURCES/places.sqlite" .
-popd
+echo 'Configuring Firefox...'
+tar -zxvf "$RESOURCES/places.sqlite" -C /home/racket
 
 # Install Racket
 
