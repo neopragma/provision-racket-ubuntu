@@ -43,7 +43,7 @@ cp -r "$RESOURCES/.images" "$HOME/Desktop/."
 echo 
 echo '============================================================='
 echo 'Configuring Firefox...'
-tar -zxvf "$RESOURCES/places.sqlite" -C /home/racket
+tar -zxvf "$RESOURCES/.mozilla" -C /home/racket
 
 # Install Racket
 
